@@ -19,7 +19,11 @@ module Lucene
   module Search
     include_package 'org.apache.lucene.search'
   end
-
+  
+  module Query
+    include_package 'org.apache.lucene.queryParser'
+  end
+  
   module TokenAttributes
     include_package 'org.apache.lucene.analysis.tokenattributes'
   end
