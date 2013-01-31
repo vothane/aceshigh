@@ -10,13 +10,17 @@ demo
 
 open a JRuby terminal (if using rvm: rvm use jruby)
 
-type
+go inside the aceshigh dir and type
 
+```
 jruby index_server.rb druby://localhost:12345 
+```
 
 should get output of
 
+```
 druby://localhost:12345
+```
 
 search server is running
 
@@ -24,12 +28,16 @@ now open a second terminal with MRI Ruby (rvm use ruby-1.9.3)
 
 type
 
+```
 irb
+```
 
 in irb type
 
+```
 > require 'drb/drb'
 > e = DRbObject.new_with_uri('druby://localhost:12345')
 > e.index("id", "test")
+```
 
 will index field 'id' with value "test" in Lucene
