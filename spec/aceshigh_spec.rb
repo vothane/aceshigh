@@ -92,7 +92,7 @@ describe 'Lucene Java library in JRuby' do
           
       term = Lucene::Index::Term.new("city", "Den Haag")
       query = Lucene::Search::TermQuery.new(term)
-      searcher.search(query, 1).tap { |x| binding.pry }.totalHits.should == 1
+      searcher.search(query, 1).totalHits.should == 1
     end     
   end  
 
