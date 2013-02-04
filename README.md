@@ -36,8 +36,8 @@ in irb type
 
 ```
 > require 'drb/drb'
-> e = DRbObject.new_with_uri('druby://localhost:12345')
-> e.index("id", "test")
+> client = DRbObject.new_with_uri('druby://localhost:12345')
+> client.index("id", "test")
 ```
 
 will index field 'id' with value "test" in Lucene
