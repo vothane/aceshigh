@@ -1,7 +1,7 @@
 require 'drb/drb'
 require 'lib/aceshigh'
 
-class IndexServer
+class AcesHigh
 
   def initialize
     directory = Lucene::Store::RAMDirectory.new 
@@ -19,12 +19,3 @@ class IndexServer
   end 
 
 end
-
-# [Terminal server with jruby]
-# jruby puts00.rb druby://localhost:12345
-# druby://localhost:12345
-
-uri = ARGV.shift
-DRb.start_service(uri, IndexServer.new)
-puts DRb.uri
-DRb.thread.join()
