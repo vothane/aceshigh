@@ -13,7 +13,7 @@ open a JRuby terminal (if using rvm: rvm use jruby)
 go inside the aceshigh dir and type
 
 ```
-jruby index_server.rb druby://localhost:12345 
+jruby aceshigh_server.rb druby://localhost:12345 
 ```
 
 should get output of
