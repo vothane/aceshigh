@@ -4,10 +4,11 @@ require 'lib/aceshigh'
 class AcesHigh
 
   def initialize
-    directory = Lucene::Store::RAMDirectory.new 
-    @indexer  = Lucene::Index::IndexWriter.new(directory, Lucene::Analysis::WhitespaceAnalyzer.new, Lucene::Index::IndexWriter::MaxFieldLength::UNLIMITED) 
+    @directory = Lucene::Store::RAMDirectory.new 
+    @indexer  = Lucene::Index::IndexWriter.new(@directory, Lucene::Analysis::WhitespaceAnalyzer.new, Lucene::Index::IndexWriter::MaxFieldLength::UNLIMITED) 
+    @indexer.commit
     @parser    = Lucene::Query::QueryParser.new(Lucene::Version::LUCENE_CURRENT, "contents", Lucene::Analysis::WhitespaceAnalyzer.new) 
-    @searcher  = Lucene::Search::IndexSearcher.new(directory) 
+    @searcher  = Lucene::Search::IndexSearcher.new(@directory) 
   end
 
   def index(field, value)
@@ -21,12 +22,14 @@ class AcesHigh
     parsed_query = parser.parse(query)
     query_results = searcher.search(parsed_query)
     query_results.doc.each do |query_result|
-      result << query_result.get(field)
+      results << query_result.get(field)
     end
+    results
   end
 
   def finalize
     @indexer.close
+    @directory.close
   end 
 
 end
