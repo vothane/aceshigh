@@ -1,4 +1,4 @@
-require 'drb/drb'
+require 'pry'
 require 'lib/aceshigh'
 
 class AcesHigh
@@ -17,10 +17,12 @@ class AcesHigh
     @indexer.add_document(doc)    
   end
 
-  def search(query, field)
+  def search(query)
     results = []
-    parsed_query = parser.parse(query)
-    query_results = searcher.search(parsed_query)
+    parsed_query = @parser.parse(query)   
+    collector = Lucene::Search::TopScoreDocCollector.create(10, true)
+    query_results = @searcher.search(parsed_query, collector)
+    binding.pry
     query_results.doc.each do |query_result|
       results << query_result.get(field)
     end
@@ -33,3 +35,5 @@ class AcesHigh
   end 
 
 end
+
+binding.pry
