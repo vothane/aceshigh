@@ -22,7 +22,6 @@ class AcesHigh
     parsed_query = @parser.parse(query)   
     collector = Lucene::Search::TopScoreDocCollector.create(10, true)
     query_results = @searcher.search(parsed_query, collector)
-    binding.pry
     query_results.doc.each do |query_result|
       results << query_result.get(field)
     end
@@ -35,5 +34,3 @@ class AcesHigh
   end 
 
 end
-
-binding.pry
