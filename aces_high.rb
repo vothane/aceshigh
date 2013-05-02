@@ -2,7 +2,7 @@ require 'pry'
 require 'lib/aceshigh'
 
 module Aces
-  module high
+  module High
     class Index 
       extend Forwardable
 
