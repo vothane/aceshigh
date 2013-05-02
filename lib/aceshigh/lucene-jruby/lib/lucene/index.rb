@@ -1,10 +1,10 @@
 require 'monitor'
-require 'lucene/jars'
-require 'lucene/transaction'
-require 'lucene/index_searcher'
-require 'lucene/document'
-require 'lucene/field_info'
-require 'lucene/index_info'
+require_relative 'jars/lucene-core-2.9.1'
+require_relative './transaction'
+require_relative './index_searcher'
+require_relative './document'
+require_relative './field_info'
+require_relative './index_info'
 
 #
 # A wrapper for the Java lucene search library.
