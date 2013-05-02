@@ -5,6 +5,6 @@ require 'aces_high'
 # druby://localhost:12345
 
 uri = ARGV.shift
-DRb.start_service(uri, AcesHigh.new('test_index'))
+DRb.start_service(uri, Aces::High::AcesHigh.new('test_index'))
 puts DRb.uri
 DRb.thread.join()
