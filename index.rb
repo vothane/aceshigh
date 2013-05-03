@@ -3,13 +3,15 @@ module Aces
     module Indexer
 
       extend self
-      
+
       def index(index_path)
         Index.new(index_path)
       end
 
       class Index 
         extend Forwardable
+        
+        def_delegator  :@index, :<<, :index
 
         def_delegators :@index, :<<, :clear, :commit, :uncommited, :find, :field_infos
 
