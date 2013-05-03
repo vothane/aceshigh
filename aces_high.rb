@@ -1,6 +1,5 @@
 require 'pry'
 require 'lib/aceshigh'
-require_relative './index'
 
 module Aces
   module High
