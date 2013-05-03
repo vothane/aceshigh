@@ -1,15 +1,16 @@
 require 'pry'
 require 'lib/aceshigh'
+require_relative './index'
 
 module Aces
   module High
-    class Index 
-      extend Forwardable
+    class SearchEngine 
+      include Indexer
 
-      def_delegators :@index, :<<, :clear, :commit, :uncommited, :find, :field_infos
+      attr_accessor :indexer
 
-      def initialize(index)
-        @index = Lucene::Index.new(index)
+      def initialize(index_path)
+        @indexer = index(index_path)
       end
     end
   end
