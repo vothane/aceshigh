@@ -5,7 +5,7 @@ require_relative './index'
 module Aces
   module High
     class SearchEngine 
-      include Indexer
+      include Indexable
 
       attr_accessor :indexer
 

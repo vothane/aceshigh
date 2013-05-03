@@ -1,6 +1,6 @@
 module Aces
   module High
-    module Indexer
+    module Indexable
 
       extend self
 
