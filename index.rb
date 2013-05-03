@@ -1,6 +1,9 @@
 module Aces
   module High
     module Indexer
+
+      extend self
+      
       def index(index_path)
         Index.new(index_path)
       end
