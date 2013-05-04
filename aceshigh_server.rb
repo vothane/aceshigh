@@ -1,5 +1,5 @@
 require 'drb/drb'
-require 'aces_high'
+require 'search_engine'
 # [Terminal server with jruby]
 # jruby aceshigh_server.rb druby://localhost:12345
 # druby://localhost:12345
