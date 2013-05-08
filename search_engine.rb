@@ -7,11 +7,11 @@ module Aces
       include Indexable
       include IndexInformable
 
-      attr_accessor :indexer, :indexer_info
+      attr_accessor :indexer, :index_informer
 
       def initialize(index_path)
         @indexer = index(index_path)
-        @indexer_info = index_info(index_path)
+        @index_informer = index_info(index_path)
       end
     end
   end
