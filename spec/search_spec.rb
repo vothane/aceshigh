@@ -1,41 +1,69 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
-describe 'Lucene Java library searching in JRuby' do
+describe "searching" do
 
-  context "when searching documents on an index with query" do
-      
-    ids       = ["1", "2"]
-    unindexed = ["Netherlands", "Italy"]
-    unstored  = ["Amsterdam  is the largest city and the capital of the Netherlands. It has lots of bridges. Amsterdam is famous for its vibrant and diverse nightlife.", 
-                 "Venice has lots of canals. Venice has been the setting or chosen location of numerous films, novels, poems and other cultural references."]
-    text      = ["Amsterdam", "Venice"]
-    
-    let(:directory) { Lucene::Store::RAMDirectory.new }
-    let(:indexer)   { Lucene::Index::IndexWriter.new(directory, Lucene::Analysis::WhitespaceAnalyzer.new, Lucene::Index::IndexWriter::MaxFieldLength::UNLIMITED) }
-    let(:parser)    { Lucene::Query::QueryParser.new(Lucene::Version::LUCENE_CURRENT, "contents", Lucene::Analysis::WhitespaceAnalyzer.new) }
-    let(:searcher)  { Lucene::Search::IndexSearcher.new(directory) }
-    
-    before(:all) do
-      
-      ids.each_with_index do |item, index|
-        doc = Lucene::Doc::Document.new
-        doc.add(Lucene::Doc::Field.new("id", ids[index], Lucene::Doc::Field::Store::YES, Lucene::Doc::Field::Index::NOT_ANALYZED))
-        doc.add(Lucene::Doc::Field.new("country", unindexed[index], Lucene::Doc::Field::Store::YES, Lucene::Doc::Field::Index::NO))
-        doc.add(Lucene::Doc::Field.new("contents", unstored[index], Lucene::Doc::Field::Store::NO, Lucene::Doc::Field::Index::ANALYZED))
-        doc.add(Lucene::Doc::Field.new("city", text[index], Lucene::Doc::Field::Store::YES, Lucene::Doc::Field::Index::ANALYZED))
-        indexer.add_document(doc)     
-      end 
-       
+  before(:each) do
+    @index = Aces::High::Indexable.index('../../test_index')
+    @index.field_infos[:value][:type] = Fixnum
+    @index << {:id => '1', :name => 'abcdef', :foo => 'bar', :value => 1}
+    @index << {:id => '2', :name => 'abcdef', :foo => 'baaz', :value => 2}
+    @index << {:id => '3', :name => 'x', :foo => 'bar', :value => 3}
+    @index << {:id => '4', :name => ['x', 'y', 'z']}
+
+    @doc1 = @index.uncommited['1']
+    @doc2 = @index.uncommited['2']
+    @doc3 = @index.uncommited['3']
+    @doc4 = @index.uncommited['4']
+    @index.commit
+  end
+
+  context "when using index find" do
+
+    it "should find a document using a simple dsl query" do
+      hits = @index.find { name == 'abcdef' }
+
+      hits.size.should == 2
+      hits.should include(@doc1, @doc2)
     end
-    
-    it "should be able to parse query before searching" do  
-      query = parser.parse("+canals +bridges -capital")
-      searcher.search(query).totalHits.should == 1
-      #d = searcher.doc(docs.scoreDocs[0].doc)
-      #assertEquals("Ant in Action", d.get("title"))
-      #query = parser.parse("mock OR junit")
-      #docs = searcher.search(query, 10)
-      #assertEquals("Ant in Action, " +"JUnit in Action, Second Edition",2, docs.totalHits)
-    end   
-  end  
+
+    it "should find a document using a compound | expression" do
+      hits = @index.find { (name == 'abcdef') | (name == 'x') }
+      hits.size.should == 4
+      hits.should include(@doc1, @doc2, @doc3, @doc4)
+
+      hits = @index.find { (name == 'abcdefx') | (name == 'x') }
+      hits.size.should == 2
+      hits.should include(@doc3, @doc4)
+
+    end
+
+    it "should find a document using a compound & expression with the same key" do
+      hits = @index.find { (name == 'y') & (name == 'x') }
+      hits.size.should == 1
+      hits.should include(@doc4)
+
+      hits = @index.find { (name == 'y') & (name == 'x') & (name == 'a') }
+      hits.size.should == 0
+    end
+
+    it "should find with Range" do
+      hits = @index.find { value == 2..9 }
+      hits.size.should == 2
+      hits.should include(@doc2, @doc3)
+    end
+
+    it "should find with Range in a compound expression " do
+      hits = @index.find { (name == 'abcdef') & (value == 2..9) }
+      hits.size.should == 1
+      hits.should include(@doc2)
+    end
+
+
+    it "should find with a compound & expression" do
+      hits = @index.find { (name == 'abcdef') & (foo == 'bar') }
+
+      hits.size.should == 1
+      hits.should include(@doc1)
+    end
+  end
 end

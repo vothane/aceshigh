@@ -6,12 +6,14 @@ module Aces
     class SearchEngine 
       include Indexable
       include IndexInformable
+      include FieldInformable
 
       attr_accessor :indexer, :index_informer
 
-      def initialize(index_path)
-        @indexer = index(index_path)
-        @index_informer = index_info(index_path)
+      def initialize(params = {})
+        @indexer        = index(params[:index_path])
+        @index_informer = index_info(params[:index_path])
+        @field_informer = field_info(params[:fields])
       end
     end
   end
