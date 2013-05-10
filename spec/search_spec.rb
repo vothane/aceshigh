@@ -36,7 +36,6 @@ describe "searching" do
       hits = index.find { (name == 'abcdefx') | (name == 'x') }
       hits.size.should == 2
       hits.should include(@doc3, @doc4)
-
     end
 
     it "should find a document using a compound & expression with the same key" do
@@ -59,7 +58,6 @@ describe "searching" do
       hits.size.should == 1
       hits.should include(@doc2)
     end
-
 
     it "should find with a compound & expression" do
       hits = index.find { (name == 'abcdef') & (foo == 'bar') }
@@ -113,4 +111,49 @@ describe "searching" do
       result.size.should == 0
     end
   end
+
+  context "when searching with queries" do
+
+    before(:each) do
+      field = Aces::High::FieldInformable.field_info
+binding.pry
+      field[:store] = true
+      index.field_infos[:name] = field
+      index << {:id => "9", :name => 'name1', :value=>1, :group=>'a'}
+      index << {:id => "10", :name => 'name2', :value=>2, :group=>'a'}
+      index << {:id => "11", :name => 'name3', :value=>2, :group=>'b'}
+      index << {:id => "12", :name => ['abc', 'def', '123']}
+
+      @doc1 = index.uncommited["9"]
+      @doc2 = index.uncommited["10"]
+      @doc3 = index.uncommited["11"]
+      @doc4 = index.uncommited["12"]
+
+      index.commit
+    end
+
+    it "should find a doc by only using its id, index.find('1')" do
+      r = index.find("1")
+      r.size.should == 1
+      r.should include(@doc1)
+    end
+
+    it "should find a doc with a specified field, index.find('name:\"name1\"')" do
+      r = index.find("name:'name2'")
+      r.size.should == 1
+      r.should include(@doc2)
+    end
+
+    it "should find a doc with wildcard queries" do
+      r = index.find("name:name*")
+      r.size.should == 3
+      r.should include(@doc2)
+    end
+
+    it "should find handle OR queries" do
+      r = index.find('group:\"b\" OR name:\"name1\"')
+      r.size.should == 2
+      r.should include(@doc3, @doc1)
+    end
+  end 
 end
