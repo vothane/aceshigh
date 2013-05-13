@@ -18,6 +18,10 @@ module Aces
         @indexer.index_data( data )
       end 
 
+      def search(query)
+        @indexer.find(query)
+      end 
+
       def clear_index
         @indexer.clear
       end 
@@ -26,7 +30,7 @@ module Aces
         @indexer.commit
       end  
 
-      def not_commited
+      def not_committed
         @indexer.uncommited
       end    
     end
