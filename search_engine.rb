@@ -16,7 +16,19 @@ module Aces
 
       def index(data)
         @indexer.index_data( data )
+      end 
+
+      def clear_index
+        @indexer.clear
+      end 
+
+      def commit_to_index
+        @indexer.commit
       end  
+
+      def not_commited
+        @indexer.uncommited
+      end    
     end
   end
 end
