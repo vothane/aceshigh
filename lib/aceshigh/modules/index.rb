@@ -4,19 +4,19 @@ module Aces
 
       extend self
 
-      def index(index_path)
-        Index.new(index_path)
+      def get_index(index_path)
+        LuceneIndex.new(index_path)
       end
 
-      class Index 
+      class LuceneIndex 
         extend Forwardable
         
-        def_delegator  :@index, :<<, :index
+        def_delegator  :@lucene_index, :<<, :index_data
 
-        def_delegators :@index, :<<, :clear, :commit, :uncommited, :find, :field_infos
+        def_delegators :@lucene_index, :<<, :clear, :commit, :uncommited, :find, :field_infos
 
         def initialize(index_path)
-          @index = Lucene::Index.new(index_path)
+          @lucene_index = Lucene::Index.new(index_path)
         end
       end
     end
