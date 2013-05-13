@@ -37,7 +37,10 @@ in irb type
 ```
 > require 'drb/drb'
 > client = DRbObject.new_with_uri('druby://localhost:12345')
-> client.index("id", "test")
+> client.clear_index
+> client.index({:id => '69', :content => 'kjbkjkj'})
+> client.commit_to_index
+> client.search(:id => '69')
 ```
 
 will index field 'id' with value "test" in Lucene
