@@ -32,7 +32,11 @@ module Aces
 
       def not_committed
         @indexer.uncommited
-      end    
+      end 
+
+      def store_field(field)
+        @indexer.field_infos[field] = Lucene::FieldInfo.new(store: true)
+      end  
     end
   end
 end
