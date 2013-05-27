@@ -2,13 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe 'aceshigh search engine' do
 
-  let(:search_engine) { Aces::High::SearchEngine.new('../../test_index') }
+  let(:search_engine) { Aces::High::SearchEngine.new(index_path: '../../test_index') }
 
   context "when calling methods on indexer" do
     
     it "should delegate to Lucene index <<" do
       Lucene::Index.any_instance.should_receive(:<<).with( {:id => '69', :content => 'kjbkjkj'} )
-      search_engine.indexer.index( {:id => '69', :content => 'kjbkjkj'} )
+      search_engine.index( {:id => '69', :content => 'kjbkjkj'} )
     end
 
     it "should delegate to Lucene index clear" do

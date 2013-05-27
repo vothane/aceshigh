@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "searching" do
 
-  let(:index) { Aces::High::Indexable.index('../../test_index') }
+  let(:index) { Aces::High::Indexable.get_index('../../test_index') }
 
   context "when using index find" do
 
@@ -115,10 +115,9 @@ describe "searching" do
   context "when searching with queries" do
 
     before(:each) do
-      field = Aces::High::FieldInformable.field_info
-binding.pry
-      field[:store] = true
-      index.field_infos[:name] = field
+      #field = Aces::High::FieldInformable.field_info
+      #field[:store] = true
+      #index.field_infos[:name] = field
       index << {:id => "9", :name => 'name1', :value=>1, :group=>'a'}
       index << {:id => "10", :name => 'name2', :value=>2, :group=>'a'}
       index << {:id => "11", :name => 'name3', :value=>2, :group=>'b'}
@@ -133,7 +132,7 @@ binding.pry
     end
 
     it "should find a doc by only using its id, index.find('1')" do
-      r = index.find("1")
+      r = index.find("9")
       r.size.should == 1
       r.should include(@doc1)
     end

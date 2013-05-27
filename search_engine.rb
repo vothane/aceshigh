@@ -8,6 +8,8 @@ module Aces
       include IndexInformable
       include FieldInformable
 
+      attr_accessor :indexer, :index_informer
+      
       def initialize(params = {})
         @indexer        = get_index(params[:index_path])
         @index_informer = index_info(params[:index_path])

@@ -18,6 +18,10 @@ module Aces
         def initialize(index_path)
           @lucene_index = Lucene::Index.new(index_path)
         end
+
+        def get_index_path
+          @lucene_index.to_s
+        end  
       end
     end
   end
