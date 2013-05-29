@@ -37,7 +37,7 @@ module Aces
       end 
 
       def store_field(field)
-        @indexer.field_infos[field] = Lucene::FieldInfo.new(store: true)
+        @indexer.field_infos[field][:store] = true
       end  
     end
   end
