@@ -21,7 +21,7 @@ module Aces
       end 
 
       def search(query)
-        @indexer.find(query)
+        extract_results( @indexer.find(query) )
       end 
 
       def clear_index
@@ -38,6 +38,17 @@ module Aces
 
       def store_field(field)
         @indexer.field_infos[field][:store] = true
+      end  
+
+      private
+
+      def extract_results(hits)
+        results = []
+        # unable to do Ruby-esqe iterations on java collection
+        hits.size.times do |index|
+          results << hits[index].props
+        end  
+        results
       end  
     end
   end

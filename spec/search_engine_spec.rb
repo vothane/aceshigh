@@ -34,4 +34,25 @@ describe 'aceshigh search engine' do
       search_engine.index_informer.info_for_id( 69 )
     end
   end
+
+  context "when doing actual searching on index" do
+
+    before(:each) do
+      search_engine.store_field(:name)
+      search_engine.store_field(:value)
+
+      search_engine.index( {:id => "9", :name => 'name1', :value => 1, :group => 'a'} )
+      search_engine.index( {:id => "10", :name => 'name2', :value => 2, :group => 'a'} )
+      search_engine.index( {:id => "11", :name => 'name3', :value => 2, :group => 'b'} )
+      search_engine.index( {:id => "12", :name => ['abc', 'def', '123']} )
+
+      search_engine.commit_to_index
+    end
+    
+    it "should find store fields" do
+      results = search_engine.search("name:'name2'")
+      results.size.should == 1 
+      results.should include( {:id => "10", :name => "name2", :value => "2"} )
+    end
+  end
 end

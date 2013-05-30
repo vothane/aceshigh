@@ -115,6 +115,8 @@ describe "searching" do
   context "when searching with queries" do
 
     before(:each) do
+      index.field_infos[:name][:store] = true
+
       index << {:id => "9", :name => 'name1', :value=>1, :group=>'a'}
       index << {:id => "10", :name => 'name2', :value=>2, :group=>'a'}
       index << {:id => "11", :name => 'name3', :value=>2, :group=>'b'}
