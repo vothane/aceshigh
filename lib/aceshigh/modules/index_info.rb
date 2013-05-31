@@ -13,7 +13,7 @@ module Aces
         
         def_delegator  :@index_info, :[], :info_for_id
 
-        def_delegators :@index_info, :id_field, :[]
+        def_delegators :@index_info, :id_field, :[], :infos
 
         def initialize(index_path)
           @index_info = Lucene::IndexInfo.new(index_path)

@@ -1,5 +1,6 @@
 require 'pry'
 require 'lib/aceshigh'
+require 'active_support/core_ext/string/inflections'
 
 module Aces
   module High
@@ -21,7 +22,7 @@ module Aces
       end 
 
       def search(query)
-        extract_results( @indexer.find(query) )
+        extract_to_hash( @indexer.find(query) )
       end 
 
       def clear_index
@@ -38,11 +39,15 @@ module Aces
 
       def store_field(field)
         @indexer.field_infos[field][:store] = true
-      end  
+      end 
+
+      def set_field_type(field, type)
+        @indexer.field_infos[field][:type] = (type.to_s).constantize
+      end 
 
       private
 
-      def extract_results(hits)
+      def extract_to_hash(hits)
         results = []
         # unable to do Ruby-esqe iterations on java collection
         hits.size.times do |index|
