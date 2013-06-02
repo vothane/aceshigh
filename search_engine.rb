@@ -45,6 +45,10 @@ module Aces
         @indexer.field_infos[field][:type] = (type.to_s).constantize
       end 
 
+      def tokenize_text_field(field)
+        @indexer.field_infos[field][:tokenized] = true
+      end 
+
       private
 
       def extract_to_hash(hits)
