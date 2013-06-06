@@ -39,6 +39,7 @@ in irb type
 > client = DRbObject.new_with_uri('druby://localhost:12345')
 > client.clear_index
 > client.index({:id => '69', :content => 'kjbkjkj'})
+> client.store_field(:content)
 > client.commit_to_index
 > client.search(:id => '69')
 ```
