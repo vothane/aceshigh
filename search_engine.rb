@@ -49,6 +49,10 @@ module Aces
         @indexer.field_infos[field][:tokenized] = true
       end 
 
+      def text_field_analyzer(field, analyzer)
+        @indexer.field_infos[field][:analyzer] = analyzer
+      end 
+
       private
 
       def extract_to_hash(hits)
