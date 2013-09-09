@@ -24,7 +24,9 @@ druby://localhost:12345
 
 search server is running
 
-now open a second terminal with MRI Ruby (rvm use ruby-1.9.3)
+## Example Usage
+
+now open a second terminal with MRI Ruby (rvm use ruby 1.9.3 or 2.0.0)
 
 type
 
