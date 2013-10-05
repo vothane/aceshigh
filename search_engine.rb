@@ -53,6 +53,10 @@ module Aces
         @indexer.field_infos[field][:analyzer] = analyzer
       end 
 
+      def remove_from_index(id)
+        @indexer.delete(id)
+      end 
+
       private
 
       def extract_to_hash(hits)
