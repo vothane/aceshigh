@@ -57,6 +57,10 @@ module Aces
         @indexer.delete(id)
       end 
 
+      def removed_from_index?(id)
+        @indexer.deleted?(id)
+      end 
+
       private
 
       def extract_to_hash(hits)
