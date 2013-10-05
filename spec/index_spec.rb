@@ -26,4 +26,10 @@ describe "Indexable" do
     @index.uncommited['69'][:id].should == '69'
     @index.uncommited['69'][:content].should == 'kjbkjkj'
   end
+
+  it "should delete doc by id" do
+    @index.deleted?('69').should be_false
+    @index.delete('69')
+    @index.deleted?('69').should be_true
+  end  
 end

@@ -13,7 +13,7 @@ module Aces
         
         def_delegator  :@lucene_index, :<<, :index_data
 
-        def_delegators :@lucene_index, :<<, :clear, :commit, :uncommited, :find, :field_infos
+        def_delegators :@lucene_index, :<<, :clear, :commit, :uncommited, :find, :field_infos, :delete, :deleted?
 
         def initialize(index_path)
           @lucene_index = Lucene::Index.new(index_path)
