@@ -45,11 +45,12 @@ module Aces
         @indexer.field_infos[field][:type] = (type.to_s).constantize
       end 
 
+      def tokenize_text_field(field)
+        @indexer.field_infos[field][:tokenized] = true
+      end 
+
       def text_field_analyzer(field, analyzer)
-        if (@indexer.field_infos[field][:type] == String) && ([:whitespace, :keyword, :simple].includes? analyzer)
-          @indexer.field_infos[field][:analyzer] = analyzer
-          @indexer.field_infos[field][:tokenized] = true
-        end
+        @indexer.field_infos[field][:analyzer] = analyzer
       end 
 
       def remove_from_index(id)
