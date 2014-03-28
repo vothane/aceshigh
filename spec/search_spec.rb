@@ -16,7 +16,7 @@ describe "searching" do
       hits = index.search 'name:abcdef' 
 
       hits.size.should == 2
-      #hits.should include(@doc1, @doc2)
+      hits.should include({"hobby"=>"hipstering"}, {"hobby"=>"baseball"})
     end
   end 
 end

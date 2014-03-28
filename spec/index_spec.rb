@@ -11,9 +11,10 @@ describe "Indexable with RAM memory" do
   end
 
   it "should index data hash" do
-    @index_ram.index({:name => "Miles", :hobby => "hipster"})
+    @index_ram.index({:name => "Miles", :hobby => "hipstering"})
+    @index_ram.index({:name => "Miles", :hobby => "baseball"})
     hits = @index_ram.find("name:miles")
-binding.pry    
+    hits.count.should == 2
   end
 end
 

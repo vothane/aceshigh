@@ -28,7 +28,13 @@ module Aces
         end  
 
         def find(query, max_results = 10)
-          @clucy.search(@lucene_index, query, max_results)
+          hits = @clucy.search(@lucene_index, query, max_results)
+          results = []
+          hits.each do |hit|
+            pair = hit.first
+            results << {pair[0].name => pair[1]}
+          end       
+          results
         end  
       end
     end
