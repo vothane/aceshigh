@@ -8,6 +8,8 @@ module Aces
 
         extend Forwardable
 
+        attr_accessor :lucene_index
+        
         def initialize(index_path=nil)
           clucy = ClojureBridge.new
           clucy._import "clucy.core"

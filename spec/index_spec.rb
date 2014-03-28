@@ -7,5 +7,6 @@ describe "Indexable with RAM memory" do
 
   it "have an instance of Clucy" do
     @index.should_not be_nil
+    @index.lucene_index.should be_a( Java::OrgApacheLuceneStore::RAMDirectory )
   end
 end
