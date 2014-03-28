@@ -1,4 +1,3 @@
-require 'pry'
 require 'lib/aceshigh'
 require 'active_support/core_ext/string/inflections'
 
