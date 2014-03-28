@@ -5,8 +5,6 @@ module Aces
   module High
     class SearchEngine 
       include Indexable
-      include IndexInformable
-      include FieldInformable
 
       attr_accessor :indexer, :index_informer
       

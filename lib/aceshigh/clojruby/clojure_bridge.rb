@@ -44,8 +44,4 @@ class ClojureBridge
   def method_missing symbol, *args
     _invoke symbol, *args
   end
-
-  def self.persistent_map entries=[]
-    Java::ClojureLang::PersistentArrayMap.new entries.to_java
-  end
 end
