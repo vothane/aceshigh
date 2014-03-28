@@ -9,10 +9,12 @@ module Aces
         extend Forwardable
 
         def initialize(index_path=nil)
-          if index_path
-            @lucene_index = Clucy.instance._import("clucy.core").memory_index
+          clucy = ClojureBridge.new
+          clucy._import "clucy.core"
+          if (index_path == nil)
+            @lucene_index = clucy.memory_index
           else  
-            @lucene_index = Clucy.instance._import("clucy.core").disk_index(index_path)
+            @lucene_index = clucy.disk_index(index_path)
           end   
         end
       end
