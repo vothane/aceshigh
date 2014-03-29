@@ -3,12 +3,12 @@ aceshigh
 
 **ac** tive **e** ngine for **s** earch in **h** eavy &amp; l **igh** t ruby web apps (rails, sinatra, ...)
 
-Exposes the Lucene Java libraries to any implementation of Ruby by using JRuby and DRb.
+Exposes the Lucene Java libraries to any implementation of Ruby by using JRuby (using DRb as a messaging server) and Clojure as an interop JVM language to interface with Lucene.
 
 
 demo
 
-open a JRuby terminal (if using rvm: rvm use jruby or chruby ruby if using  chruby)
+open a **JRuby** terminal (if using rvm: rvm use **jruby** or chruby **jruby** if using chruby)
 
 go inside the aceshigh dir and type
 
