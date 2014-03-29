@@ -21,8 +21,12 @@ module Aces
 
         def find(query, max_results = 10)
           hits = @clucy.search(@lucene_index, query, max_results)
-          Clojure::Map::clojure_map_to_ruby_arr(hits)
+          Clojure::Map::clojure_map_to_ruby_array(hits)
         end  
+
+        def delete(query)
+          deleted = @clucy.search_and_delete(@lucene_index, query)
+        end
       end
 
     end

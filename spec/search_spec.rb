@@ -13,10 +13,10 @@ describe "searching" do
     end
 
     it "should find a document using a simple dsl query" do
-      hits = index.search 'name:abcdef' 
+      hits = index.find('name:abcdef') 
 
       hits.size.should == 2
-      hits.should include({"hobby"=>"hipstering"}, {"hobby"=>"baseball"})
+      hits.should include({"value"=>"1"}, {"value"=>"2}"})
     end
   end 
 end

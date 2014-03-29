@@ -16,7 +16,7 @@ module Clojure
       end
     end
 
-    def self.clojure_map_to_ruby_arr(clojure_map, arr=[])
+    def self.clojure_map_to_ruby_array(clojure_map, arr=[])
       clojure_map.inject(arr) do |arr, hit|
         pair = hit.first
         arr << {pair[0].name => pair[1]}
