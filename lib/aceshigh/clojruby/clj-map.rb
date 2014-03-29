@@ -16,11 +16,13 @@ module Clojure
       end
     end
 
-    def self.to_ruby_hash(clojure_map)
-      hash.inject({}) do |map, pair|
-        clojure_map.first
-      end  
+    def self.clojure_map_to_ruby_arr(clojure_map, arr=[])
+      clojure_map.inject(arr) do |arr, hit|
+        pair = hit.first
+        arr << {pair[0].name => pair[1]}
+      end 
+      arr
     end
-    
+
   end
 end

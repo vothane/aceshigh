@@ -2,10 +2,8 @@ module Aces
   module High
     module Indexable
 
-      extend self
-
       class LuceneIndex 
-        
+
         def initialize(index_path=nil)
           @clucy = ClojureBridge.new
 
@@ -23,14 +21,10 @@ module Aces
 
         def find(query, max_results = 10)
           hits = @clucy.search(@lucene_index, query, max_results)
-          results = []
-          hits.each do |hit|
-            pair = hit.first
-            results << {pair[0].name => pair[1]}
-          end       
-          results
+          Clojure::Map::clojure_map_to_ruby_arr(hits)
         end  
       end
+
     end
   end
 end
