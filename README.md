@@ -1,12 +1,11 @@
 aceshigh
 ========
 
-**ac** tive **e** ngine for **s** earch in **h** eavy &amp; l **igh** t ruby web apps (rails, sinatra, ...)
+ac_tive_ e_ngine_ for s_earch_ in _h_eavy &amp; l_igh_t ruby web apps (rails, sinatra, ...)
 
-Exposes the Lucene Java libraries to any implementation of Ruby by using JRuby (using DRb as a messaging server) and Clojure as an interop JVM language to interface with Lucene.
+Exposes the Lucene Java libraries to any implementation of Ruby by using JRuby (DRb as a messaging server) and Clojure as an interop JVM language to interface with Lucene.
 
-
-demo
+irb demo
 
 open a **JRuby** terminal (if using rvm: rvm use **jruby** or chruby **jruby** if using chruby)
 
@@ -26,7 +25,7 @@ search server is running
 
 ## Example Usage
 
-now open a second terminal with MRI Ruby (rvm use ruby 1.9.3 or 2.0.0)
+now open a second terminal with **MRI** **Ruby** (rvm use **ruby** or chruby **ruby** if using chruby)
 
 type
 
