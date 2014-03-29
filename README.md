@@ -8,7 +8,7 @@ Exposes the Lucene Java libraries to any implementation of Ruby by using JRuby a
 
 demo
 
-open a JRuby terminal (if using rvm: rvm use jruby)
+open a JRuby terminal (if using rvm: rvm use jruby or chruby ruby if using  chruby)
 
 go inside the aceshigh dir and type
 
@@ -39,11 +39,9 @@ in irb type
 ```
 > require 'drb/drb'
 > client = DRbObject.new_with_uri('druby://localhost:12345')
-> client.clear_index
-> client.index({:id => '69', :content => 'kjbkjkj'})
-> client.store_field(:content)
-> client.commit_to_index
-> client.search(:id => '69')
+> client.index({:name => "Miles", :hobby => "snowboarding"})
+> client.index({:name => "Miles", :hobby => "couch-surfing"})
+> client.index({:name => "Lisa",  :hobby => "Bookworm"})
+> client.search("name:Miles")
+=> [{"hobby"=>"snowboarding"}, {"hobby"=>"couch-surfing"}]
 ```
-
-will index field 'id' with value "test" in Lucene
