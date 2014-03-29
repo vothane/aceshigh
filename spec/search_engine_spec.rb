@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe 'aceshigh search engine' do
 
-  let(:search_engine) { Aces::High::SearchEngine.new(index_path: '../../test_index') }
+  let(:search_engine) { Aces::High::SearchEngine.new }
 
   context "when doing actual searching on index" do
 

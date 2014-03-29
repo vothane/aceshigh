@@ -5,6 +5,6 @@ require 'search_engine'
 # druby://localhost:12345
 
 uri = ARGV.shift
-DRb.start_service(uri, Aces::High::SearchEngine.new(index_path: '../test_index'))
+DRb.start_service(uri, Aces::High::SearchEngine.new)
 puts DRb.uri
 DRb.thread.join()
