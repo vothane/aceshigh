@@ -6,8 +6,7 @@ describe "Indexable with RAM memory" do
   end
 
   it "have an instance of Clucy" do
-    @index.should_not be_nil
-    @index.lucene_index.should be_a( Java::OrgApacheLuceneStore::RAMDirectory )
+    @index_ram.should_not be_nil
   end
 
   it "should index data hash" do
@@ -15,6 +14,7 @@ describe "Indexable with RAM memory" do
     @index_ram.index({:name => "Miles", :hobby => "baseball"})
     hits = @index_ram.find("name:miles")
     hits.count.should == 2
+    hits.should include({"hobby"=>"hipstering"}, {"hobby"=>"baseball"})
   end
 end
 
@@ -25,6 +25,5 @@ describe "Indexable with disk memory" do
 
   it "have an instance of Clucy" do
     @index_disk.should_not be_nil
-    @index_disk.lucene_index.should be_a( Java::OrgApacheLuceneStore::NIOFSDirectory )
   end
 end

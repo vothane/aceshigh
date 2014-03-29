@@ -15,5 +15,12 @@ module Clojure
         map.assoc(*pair)
       end
     end
+
+    def self.to_ruby_hash(clojure_map)
+      hash.inject({}) do |map, pair|
+        clojure_map.first
+      end  
+    end
+    
   end
 end

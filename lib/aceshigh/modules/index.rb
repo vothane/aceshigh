@@ -5,13 +5,7 @@ module Aces
       extend self
 
       class LuceneIndex 
-
-        extend Forwardable
         
-        def_delegators :@lucene_index, :add, :search
-
-        attr_accessor :lucene_index, :lucene_index_writer
-
         def initialize(index_path=nil)
           @clucy = ClojureBridge.new
 
