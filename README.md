@@ -1,3 +1,5 @@
+[![Code Climate](https://codeclimate.com/github/vothane/ace_of_spades.png)](https://codeclimate.com/github/vothane/aceshigh)
+
 aceshigh
 ========
 
