@@ -24,8 +24,8 @@ module Aces
           Clojure::Map::clojure_map_to_ruby_array(hits)
         end  
 
-        def delete(query)
-          deleted = @clucy.search_and_delete(@lucene_index, query)
+        def delete(hash_data)
+          deleted = @clucy.delete(@lucene_index, Clojure::Map::new(hash_data))
         end
       end
 

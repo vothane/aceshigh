@@ -11,12 +11,24 @@ describe "Indexable with RAM memory" do
 
   it "should index data hash" do
     @index_ram.index({:name => "Miles", :hobby => "hipstering"})
-    @index_ram.index({:name => "Miles", :hobby => "baseball"})
+    @index_ram.index({:name => "Miles", :hobby => "baseball"}) 
 
     hits = @index_ram.find("name:miles")
     
     hits.count.should == 2
     hits.should include({"hobby"=>"hipstering"}, {"hobby"=>"baseball"})
+  end
+
+  it "should delete data hash" do   
+    @index_ram.index({:name => "Lisa", :hobby => "bookworm"})
+    
+    hits = @index_ram.find("name:Lisa")
+    hits.count.should == 1
+
+    @index_ram.delete({:name => "Lisa", :hobby => "bookworm"})
+    
+    hits = @index_ram.find("name:Lisa")
+    hits.count.should == 0
   end
 end
 
