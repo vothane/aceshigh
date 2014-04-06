@@ -14,7 +14,7 @@ module Aces
       end
 
       def index(data)
-        @indexer.index( data )
+        @indexer.index(data)
       end 
 
       def search(query)
@@ -34,10 +34,10 @@ module Aces
       end 
 
       def text_field_analyzer(field, analyzer)
-      end 
+      end
 
-      def remove_from_index(query)
-        @indexer.delete(query)
+      def remove_from_index(data)
+        @indexer.delete(data)
       end 
 
       def removed_from_index?(id)

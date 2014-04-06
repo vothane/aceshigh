@@ -25,7 +25,7 @@ module Aces
         end  
 
         def delete(hash_data)
-          deleted = @clucy.delete(@lucene_index, Clojure::Map::new(hash_data))
+          @clucy.delete(@lucene_index, Clojure::Map::new(hash_data))
         end
       end
 
