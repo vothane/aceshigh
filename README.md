@@ -3,6 +3,13 @@
 aceshigh
 ========
 
+> for "The Few" and their finest hour
+> ... may we do the same
+
+#### new features
+- search query suggestions/autocomplete using a a LSTM deep learner
+- search result docs ranking using the Word2Vec NLP algorithm
+
 (ac)tive (e)ngine for (s)earch in (h)eavy &amp; l(igh)t ruby web apps (rails, sinatra, ...)
 
 Exposes the Lucene Java libraries to any implementation of Ruby by using JRuby (DRb as a messaging server) and Clojure as an interop JVM language to interface with Lucene.
